@@ -1,6 +1,8 @@
 # django-method-delay
 
-This is a simple way to use Celery without writing your own tasks for models. This makes it super, duper easy to port an existing legacy app to async.
+This is a simple way to use Celery without writing your own tasks for models. This makes it super, duper easy to port an existing legacy app to async. All you have to do is:
+
+    instance.call_delay('method_name', *args, **kwargs)
 
 A demo is worth a thousand words...
 
