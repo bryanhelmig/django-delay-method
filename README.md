@@ -1,6 +1,13 @@
 # django-method-delay
 
-This is a simple way to use Celery without writing your own tasks for models. This makes it super, duper easy to port an existing legacy app to async. All you have to do is:
+This is a simple way to use Celery without writing your own tasks for models. This makes it super, duper easy to port an existing legacy app to async. All you have to do is...
+
+    from delay_method.models import DelayedMethodModel
+    
+    class YourModel(DelayedMethodModel)
+        # ...
+
+...and...
 
     instance.call_delay('method_name', *args, **kwargs)
 
@@ -8,27 +15,27 @@ A demo is worth a thousand words...
 
 ### Your models.py....
 
-	from django.db import models
+    from django.db import models
     
-	from delay_method.models import DelayedMethodModel
+    from delay_method.models import DelayedMethodModel
     
-	class Person(DelayedMethodModel):
-	    added = models.DateTimeField(auto_now_add=True)
+    class Person(DelayedMethodModel):
+        added = models.DateTimeField(auto_now_add=True)
         
-	    name = models.CharField(max_length=100)
-	    skills = models.CharField(max_length=255)
+        name = models.CharField(max_length=100)
+        skills = models.CharField(max_length=255)
         
-	    def together(self):
-	        return '{0} is great at {1}.'.format(self.name, self.skills)
+        def together(self):
+            return '{0} is great at {1}.'.format(self.name, self.skills)
         
-	    def likes(self, *args):
-	        return '{0} likes {1}.'.format(self.name, ', '.join(args))
+        def likes(self, *args):
+            return '{0} likes {1}.'.format(self.name, ', '.join(args))
         
-	    def puts(self, **kwargs):
-	        puts = ' and '.join(
-	            ['the {0} in the {1}'.format(k,v) for k,v in kwargs.items()]
-	        )
-	        return '{0} puts {1}.'.format(self.name, puts)
+        def puts(self, **kwargs):
+            puts = ' and '.join(
+                ['the {0} in the {1}'.format(k,v) for k,v in kwargs.items()]
+            )
+            return '{0} puts {1}.'.format(self.name, puts)
 
 ### Your view.py....
 
