@@ -10,7 +10,6 @@ A demo is worth a thousand words...
     
 	from delay_method.models import DelayedMethodModel
     
-    
 	class Person(DelayedMethodModel):
 	    added = models.DateTimeField(auto_now_add=True)
         
