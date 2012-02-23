@@ -8,10 +8,10 @@ class Person(DelayedMethodModel):
     added = models.DateTimeField(auto_now_add=True)
 
     name = models.CharField(max_length=100)
-    skills = models.CharField(max_length=255)
+    skill = models.CharField(max_length=255)
 
     def together(self):
-        return '{0} is great at {1}.'.format(self.name, self.skills)
+        return '{0} is great at {1}.'.format(self.name, self.skill)
 
     def likes(self, *args):
         return '{0} likes {1}.'.format(self.name, ', '.join(args))
@@ -27,11 +27,14 @@ class DelayedMethodModelTest(TestCase):
     def setUp(self):
         self.billy = Person.objects.create(
             name = 'Billy Mayes',
-            skills = 'yelling & selling'
+            skill = 'yelling & selling'
         )
 
     def test_call_self(self):
         self.assertRaises(Exception, self.billy.call_delay, ['call_delay'])
+
+    def test_call_attribute(self):
+        self.assertRaises(Exception, self.billy.call_delay, ['skill'])
 
     def test_call_delay_no_args(self):
         task = self.billy.call_delay('together')

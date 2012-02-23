@@ -24,6 +24,9 @@ class DelayedMethodModel(models.Model):
         """
         from delay_method.tasks import DelayModelMethodTask
 
+        if method == 'call_delay':
+            raise Exception('Cannot call to delay self again.')
+
         if not callable(getattr(self, method, None)):
             raise Exception('Method "{0}" on Folder is not callable.'\
                                                             .format(method))
