@@ -29,12 +29,12 @@ class Person(DelayedMethodModel):
     added = models.DateTimeField(auto_now_add=True)
     
     name = models.CharField(max_length=100)
-    skills = models.CharField(max_length=255)
+    skill = models.CharField(max_length=255)
 
     friends = models.ManyToManyField('self')
     
     def together(self):
-        return '{0} is great at {1}.'.format(self.name, self.skills)
+        return '{0} is great at {1}.'.format(self.name, self.skill)
     
     def likes(self, *args):
         return '{0} likes {1}.'.format(self.name, ', '.join(args))
