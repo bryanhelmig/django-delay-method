@@ -14,7 +14,7 @@ class DelayedMethodModel(models.Model):
         # but you can move it off task like so...
 
         task = instance.call_delay('calculate', 'primes', max=1000000000)
-        # continue....
+        # continue doing other things....
         result = task.wait()
     """
 
@@ -28,8 +28,8 @@ class DelayedMethodModel(models.Model):
             raise Exception('Method "{0}" on Folder is not callable.'\
                                                             .format(method))
 
-        return DelayModelMethodTask.delay(
-                            self.__class__, self.id, method, args, kwargs)
+        return DelayModelMethodTask.delay(self.__class__, self.id, 
+                                                    method, args, kwargs)
 
     class Meta:
         abstract = True
