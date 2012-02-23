@@ -49,7 +49,6 @@ class Person(DelayedMethodModel):
         for friend in self.friends.all():
             # send an email!
             pass
-
 ```
 
 ### Your view.py....
@@ -92,7 +91,7 @@ def trigger_view(request, person_id):
     person = Person.objects.get(id=person_id)
     
     # equivalent to person.alert_friends()
-    task1 = person.call_delay('alert_friends')
+    task = person.call_delay('alert_friends')
     
     return HttpResponse('Your friends will be alerted!'')
 ```
