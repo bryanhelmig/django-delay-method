@@ -93,5 +93,5 @@ def trigger_view(request, person_id):
     # equivalent to person.alert_friends()
     task = person.call_delay('alert_friends')
     
-    return HttpResponse('Your friends will be alerted!'')
+    return HttpResponse('Your friends will be alerted!')
 ```
