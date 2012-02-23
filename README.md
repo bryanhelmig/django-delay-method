@@ -56,7 +56,7 @@ class Person(DelayedMethodModel):
 ```python
 from django.http import HttpResponse
 
-from myproject.models import Person
+from myapp.models import Person
 
 
 def combine_view(request, person_id):
